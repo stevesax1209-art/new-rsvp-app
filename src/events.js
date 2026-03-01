@@ -1,0 +1,68 @@
+// Event configuration for the RSVP app
+export const EVENTS = [
+  {
+    id: 'cleveland',
+    city: 'Cleveland',
+    state: 'Ohio',
+    meetGreetDate: 'April 17, 2026',
+    meetGreetDateShort: 'Apr 17',
+    mainEventDate: 'April 18, 2026',
+    mainEventName: '26th Annual OPFNE Parkinson\'s Symposium',
+    mainEventRole: 'Keynote Speaker',
+    mainEventUrl: 'https://bryceperry.org/events',
+    mailerliteGroupId: '180251083036166100',
+    // Unsplash image for Cleveland
+    imageUrl:
+      'https://images.unsplash.com/photo-1580100586938-02822d99c4a8?w=800&q=80',
+    imageAlt: 'Cleveland, Ohio skyline',
+    color: '#1a3a5c',
+  },
+  {
+    id: 'phoenix',
+    city: 'Phoenix',
+    state: 'Arizona',
+    meetGreetDate: 'May 24–27, 2026',
+    meetGreetDateShort: 'May 24–27',
+    mainEventDate: 'May 25, 2026',
+    mainEventName: 'WPC 2026 – Doing Life Today Hospitality Suite',
+    mainEventRole: 'Meet & Greet',
+    mainEventUrl: 'https://bryceperry.org/events',
+    mailerliteGroupId: '180251214422737963',
+    imageUrl:
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    imageAlt: 'Phoenix, Arizona skyline',
+    color: '#7c2d12',
+  },
+  {
+    id: 'collingwood',
+    city: 'Collingwood',
+    state: 'ON, Canada',
+    meetGreetDate: 'June 7, 2026',
+    meetGreetDateShort: 'Jun 7',
+    mainEventDate: 'June 7, 2026',
+    mainEventName: 'Living Better with Parkinson\'s Conference',
+    mainEventRole: 'Speaker & Panelist',
+    mainEventUrl: 'https://bryceperry.org/events',
+    mailerliteGroupId: '180251239077906214',
+    imageUrl:
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+    imageAlt: 'Collingwood, Ontario scenic view',
+    color: '#14532d',
+  },
+  {
+    id: 'baton-rouge',
+    city: 'Baton Rouge',
+    state: 'Louisiana',
+    meetGreetDate: 'July 24, 2026',
+    meetGreetDateShort: 'Jul 24',
+    mainEventDate: 'July 25, 2026',
+    mainEventName: 'LSU – Louisiana Parkinson\'s Conference',
+    mainEventRole: 'Keynote Speaker',
+    mainEventUrl: 'https://bryceperry.org/events',
+    mailerliteGroupId: '180251255757604767',
+    imageUrl:
+      'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80',
+    imageAlt: 'Baton Rouge, Louisiana cityscape',
+    color: '#4a1d96',
+  },
+];
