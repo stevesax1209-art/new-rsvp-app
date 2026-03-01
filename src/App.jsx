@@ -4,7 +4,7 @@ import RSVPPage from './pages/RSVPPage';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/new-rsvp-app">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/rsvp/:eventId" element={<RSVPPage />} />
