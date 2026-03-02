@@ -13,15 +13,21 @@ const MAILERLITE_API_URL = 'https://connect.mailerlite.com/api';
  * Accepts RSVP submissions, saves to Firestore and adds subscriber(s) to MailerLite.
  */
 exports.rsvp = functions.https.onRequest(async (req, res) => {
+  // CORS headers for the hosted frontend
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
   // Only allow POST
   if (req.method !== 'POST') {
     res.status(405).json({ message: 'Method Not Allowed' });
     return;
   }
-
-  // CORS headers for the hosted frontend
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Headers', 'Content-Type');
 
   const {
     eventId,
@@ -91,7 +97,7 @@ exports.rsvp = functions.https.onRequest(async (req, res) => {
 
     res.status(200).json({ message: 'RSVP received. See you there!' });
   } catch (err) {
-    console.error('RSVP error:', err?.response?.data || err.message);
+    console.error('RSVP error:', err?.response?.data || err.message, err.stack);
     res.status(500).json({ message: 'Could not process RSVP. Please try again.' });
   }
 });
