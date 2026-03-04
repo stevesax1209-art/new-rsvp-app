@@ -111,11 +111,12 @@ async function addSubscriberToMailerLite(headers, groupId, name, email, eventCit
   const first = parts[0] || '';
   const last = parts.slice(1).join(' ') || '';
 
-  // Upsert subscriber
-  await axios.post(
+  // Upsert subscriber and include the group directly in the payload
+  const upsertResponse = await axios.post(
     `${MAILERLITE_API_URL}/subscribers`,
     {
       email,
+      groups: [groupId],
       fields: {
         name: `${first} ${last}`.trim(),
         last_name: last,
@@ -124,10 +125,25 @@ async function addSubscriberToMailerLite(headers, groupId, name, email, eventCit
     { headers }
   );
 
-  // Add subscriber to the event group
-  await axios.post(
-    `${MAILERLITE_API_URL}/subscribers/${encodeURIComponent(email)}/groups/${groupId}`,
-    {},
-    { headers }
-  );
+  // Explicitly assign to the group using the subscriber's UUID from the response,
+  // ensuring the subscriber is added even if they already existed.
+  const subscriberId = upsertResponse.data?.data?.id;
+  if (subscriberId) {
+    try {
+      await axios.post(
+        `${MAILERLITE_API_URL}/subscribers/${subscriberId}/groups/${groupId}`,
+        {},
+        { headers }
+      );
+    } catch (groupErr) {
+      console.error(
+        'MailerLite group assignment failed for subscriber',
+        subscriberId,
+        groupErr?.response?.data || groupErr.message
+      );
+      throw groupErr;
+    }
+  } else {
+    console.warn('MailerLite subscriber upsert did not return an ID; group assignment skipped for', email);
+  }
 }
